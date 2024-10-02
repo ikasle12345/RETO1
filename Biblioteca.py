@@ -124,7 +124,7 @@ class EstadisticaDescriptiva:
         Tipo de dato Float.
         """
         if len(datos) == 0:
-            return "El dato para la varianza se ha recibido vacío"
+            return None
         media = self.mediaAritmetica(datos)
         sumaCuadrados = sum((num - media) ** 2 for num in datos)
         return sumaCuadrados / len(datos)
