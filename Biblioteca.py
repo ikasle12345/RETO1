@@ -105,21 +105,15 @@ class EstadisticaDescriptiva:
                 print("Error: El percentil deseado debe estar entre 0 y 100.")
                 return None
             
-            # Ordenar la lista de datos
             datosOrdenados = sorted(datos)
-            # Calcular la posición del percentil
             posicionPercentil = (PercentilDeseado / 100) * (len(datosOrdenados) - 1)
             
-            # Usar int() en lugar de math.floor para el índice inferior
             indiceInferior = int(posicionPercentil)
-            # Usar math.ceil para el índice superior
             indiceSuperior = math.ceil(posicionPercentil)
             
-            # Si ambos índices son iguales, significa que estamos en una posición exacta
             if indiceInferior == indiceSuperior:
                 return datosOrdenados[indiceInferior]
             else:
-                # Interpolar entre los dos valores
                 return datosOrdenados[indiceInferior] + (posicionPercentil - indiceInferior) * (datosOrdenados[indiceSuperior] - datosOrdenados[indiceInferior])
         
         except IndexError:
