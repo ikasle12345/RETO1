@@ -2,24 +2,18 @@ import math
 
 class EstadisticaDescriptiva:
     """
-    Clase para realizar cálculos de estadísticas descriptivas sobre listas de datos numéricos.
+    Clase para realizar cálculos de estadísticas descriptivas.
     
     Descripción:
     Esta clase ofrece métodos para calcular las principales métricas estadísticas utilizadas en el análisis de datos.
-    Entre las métricas que se pueden calcular están la media aritmética, la mediana, los percentiles, la varianza y la desviación típica.
-    También proporciona un método para obtener un resumen estadístico completo de un conjunto de datos.
 
     Funcionalidades:
-    - **mediaAritmetica**: Calcula el promedio de una lista de valores.
-    - **mediana**: Encuentra el valor que divide el conjunto de datos en dos partes iguales.
-    - **percentil**: Obtiene el valor por debajo del cual se encuentra un porcentaje dado de los datos.
-    - **varianza**: Mide la dispersión de los valores respecto a la media aritmética.
-    - **desviacionTipica**: Calcula la raíz cuadrada de la varianza, indicando qué tan dispersos están los valores respecto a la media.
-    - **resumenEstadistico**: Devuelve un diccionario con todas las métricas calculadas.
-
-    Uso:
-    Esta clase está diseñada para ser utilizada con listas de valores numéricos. No se recomienda usarla con listas vacías o con valores no numéricos.
-    Cada método incluye manejo de excepciones para evitar errores de tipo y de índices.
+    - mediaAritmetica: Calcula el promedio de una lista de valores.
+    - mediana: Encuentra el valor que divide el conjunto de datos en dos partes iguales.
+    - percentil: Obtiene el valor por debajo del cual se encuentra un porcentaje dado de los datos.
+    - varianza: Mide la dispersión de los valores respecto a la media aritmética.
+    - desviacionTipica: Calcula la raíz cuadrada de la varianza, indicando qué tan dispersos están los valores respecto a la media.
+    - resumenEstadistico: Devuelve un diccionario con todas las métricas calculadas..
     """
     def mediaAritmetica(self, datos):
         """
@@ -105,21 +99,15 @@ class EstadisticaDescriptiva:
                 print("Error: El percentil deseado debe estar entre 0 y 100.")
                 return None
             
-            # Ordenar la lista de datos
             datosOrdenados = sorted(datos)
-            # Calcular la posición del percentil
             posicionPercentil = (PercentilDeseado / 100) * (len(datosOrdenados) - 1)
             
-            # Usar int() en lugar de math.floor para el índice inferior
             indiceInferior = int(posicionPercentil)
-            # Usar math.ceil para el índice superior
             indiceSuperior = math.ceil(posicionPercentil)
             
-            # Si ambos índices son iguales, significa que estamos en una posición exacta
             if indiceInferior == indiceSuperior:
                 return datosOrdenados[indiceInferior]
             else:
-                # Interpolar entre los dos valores
                 return datosOrdenados[indiceInferior] + (posicionPercentil - indiceInferior) * (datosOrdenados[indiceSuperior] - datosOrdenados[indiceInferior])
         
         except IndexError:
