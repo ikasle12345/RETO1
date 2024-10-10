@@ -34,9 +34,17 @@ class EstadisticaDescriptiva:
         Salida:
         Tipo de dato Float.
         """
-        if len(datos) == 0:
-            return "El dato para la media se ha recibido vacío"
-        return sum(datos) / len(datos)
+        try:
+            if len(datos) == 0:
+                raise ValueError("Error: La lista de datos está vacía. No se puede calcular la media aritmética.")
+            return sum(datos) / len(datos)
+        except TypeError:
+            print("Error: Todos los elementos de la lista deben ser números para calcular la media.")
+        except ZeroDivisionError:
+            print("Error: La lista no puede estar vacía para calcular la media.")
+        except Exception as e:
+            print(f"Ocurrió un error inesperado al calcular la media aritmética: {e}")
+        return None
 
     def mediana(self, datos):
         """
@@ -137,11 +145,19 @@ class EstadisticaDescriptiva:
         Salida:
         Tipo de dato Float.
         """
-        if len(datos) == 0:
-            return None
-        media = self.mediaAritmetica(datos)
-        sumaCuadrados = sum((num - media) ** 2 for num in datos)
-        return sumaCuadrados / len(datos)
+        try:
+            if len(datos) == 0:
+                raise ValueError("Error: La lista de datos está vacía. No se puede calcular la varianza.")
+            media = self.mediaAritmetica(datos)
+            sumaCuadrados = sum((num - media) ** 2 for num in datos)
+            return sumaCuadrados / len(datos)
+        except TypeError:
+            print("Error: Todos los elementos de la lista deben ser números para calcular la varianza.")
+        except ZeroDivisionError:
+            print("Error: No se puede calcular la varianza en una lista vacía.")
+        except Exception as e:
+            print(f"Ocurrió un error inesperado al calcular la varianza: {e}")
+        return None
 
     def desviacionTipica(self, datos):
         """
@@ -158,12 +174,18 @@ class EstadisticaDescriptiva:
         Retorna:
         Tipo de dato Float.
         """
-
-        varianza = self.varianza(datos)
-        if varianza is None:
-            print("Error: No se puede calcular la desviación típica de una lista vacía o con datos incorrectos.")
-            return None
-        return math.sqrt(varianza)
+        try:
+            varianza = self.varianza(datos)
+            if varianza is None:
+                raise ValueError("Error: No se puede calcular la desviación típica de una lista vacía.")
+            return math.sqrt(varianza)
+        except ValueError as ve:
+            print(ve)
+        except TypeError:
+            print("Error: Todos los elementos de la lista deben ser números para calcular la desviación típica.")
+        except Exception as e:
+            print(f"Ocurrió un error inesperado al calcular la desviación típica: {e}")
+        return None
 
     def resumenEstadistico(self, datos):
         """
